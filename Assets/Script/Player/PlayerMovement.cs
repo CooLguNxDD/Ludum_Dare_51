@@ -7,14 +7,16 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
 
     public float moveSpeed = 1f;
+
+
     public int moveGrid = 1;
     
     public bool isMovingX = false;
     public bool isMovingY = false;
 
-    public bool isWall = false;
 
-
+    private bool isWall = false;
+    private float endTime = 0;
     private GridLayout grid;
     private Vector3Int PlayerCellPosition;
     private Vector3Int PreviousPlayerCellPosition;
@@ -22,12 +24,15 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         grid = transform.GetComponentInParent<GridLayout>();
-        
+        endTime = 5 / moveSpeed;
+
+
     }
 
     // Update is called once per frame
     void Update()
-    {
+    { 
+        endTime = 5 / moveSpeed;
         Movement();
     }
 
@@ -41,40 +46,59 @@ public class PlayerMovement : MonoBehaviour
         isWall = false;
         Debug.Log("exit"+ isWall);
     }
-
-    void Movement()
+    private void Movement()
     {
-        if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f && !isMovingX)
-        {
-            PreviousPlayerCellPosition = PlayerCellPosition;
-            isMovingX = true;
-            PlayerCellPosition += new Vector3Int((int)(Input.GetAxisRaw("Horizontal")) * moveGrid, 0, 0);
-        }
-        else if (isMovingX && Input.GetAxisRaw("Horizontal") == 0f)
-        {
-            PreviousPlayerCellPosition = PlayerCellPosition;
-            isMovingX = false;
-        }
-
-        if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f && !isMovingY)
-        {
-            PreviousPlayerCellPosition = PlayerCellPosition;
-            isMovingY = true;
-            PlayerCellPosition += new Vector3Int(0, (int)(Input.GetAxisRaw("Vertical")) * moveGrid, 0);
-
-        }
-        else if (isMovingY && Input.GetAxisRaw("Vertical") == 0f)
-        {
-            PreviousPlayerCellPosition = PlayerCellPosition;
-            isMovingY = false;
-        }
-        transform.position = Vector3.MoveTowards(transform.position, grid.CellToWorld(PlayerCellPosition), moveSpeed * Time.deltaTime);
-
+        //collide wall
         if (isWall)
         {
             PlayerCellPosition = PreviousPlayerCellPosition;
         }
-        transform.position = Vector3.MoveTowards(transform.position, grid.CellToWorld(PlayerCellPosition), moveSpeed * Time.deltaTime);
-
+        //left right
+        if(Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f && !isMovingX && !isMovingY)
+        {
+            StartCoroutine(MovementX());
+        }
+        //up down
+        if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f && !isMovingY && !isMovingX)
+        {
+            StartCoroutine(MovementY());
+        }
     }
+
+    private IEnumerator MovementX()
+    {
+        // move in grid
+        PreviousPlayerCellPosition = PlayerCellPosition;
+        isMovingX = true;
+        PlayerCellPosition += new Vector3Int((int)(Input.GetAxisRaw("Horizontal")) * moveGrid, 0, 0);
+
+        float elapsedTime = 0;
+        
+        while (elapsedTime < endTime)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, grid.CellToWorld(PlayerCellPosition), moveSpeed * Time.deltaTime);
+            yield return null;
+        }
+        isMovingX = false;
+    }
+
+    private IEnumerator MovementY()
+    {
+        // move in grid
+        PreviousPlayerCellPosition = PlayerCellPosition;
+        isMovingY = true;
+        PlayerCellPosition += new Vector3Int(0, (int)(Input.GetAxisRaw("Vertical")) * moveGrid, 0);
+
+        float elapsedTime = 0;
+
+        while (elapsedTime < endTime)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, grid.CellToWorld(PlayerCellPosition), moveSpeed * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        isMovingY = false;
+    }
+
 }

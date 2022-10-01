@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpawnLineController : MonoBehaviour
+{
+    // Start is called before the first frame update
+    private bool Spawned = false;
+
+    void Awake()
+    {
+        Spawned = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player")){
+            Debug.Log("Player entered spawn line");
+            Spawned = true;
+        }
+    }
+    public bool isSpawned()
+    {
+        return Spawned;
+    }
+}

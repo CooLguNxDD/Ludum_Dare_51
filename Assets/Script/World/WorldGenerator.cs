@@ -5,53 +5,79 @@ using UnityEngine;
 public class WorldGenerator : MonoBehaviour
 {
 
-    public GameObject[] waterObject;
-    public GameObject[] groundObject;
-    public GameObject TileMap;
+    public GameObject[] mapPrefabList;
+    public GameObject nextMap;
+    public GameObject currentMap;
 
-    public int TileMapSize = 5;
-    public int endTile = 3;
+    public GameObject spawnLine;
+    public GameObject endLine;
 
-    public GameObject player;
+    public int mapOffset;
+    public int playerOffset;
 
     private GridLayout grid;
-    private Vector3Int cellPosition;
+    private bool spawned = false;
     // Start is called before the first frame update
+
 
 
     void Start()
     {
         grid = transform.GetComponent<GridLayout>();
-        SpawnWater();
     }
 
     public void Update()
     {
-        
-    }
-
-
-    public void SpawnWater()
-    {
-        for (int i = -TileMapSize; i < TileMapSize; i++)
+        //spawn next map if it reach the spawner line
+        if (spawnLine != null)
         {
-            for (int j = -TileMapSize; j < TileMapSize; j++)
+            if (spawnLine.GetComponent<SpawnLineController>().isSpawned() && !spawned)
             {
-                Vector3 pos = new Vector3(i, j, -5);
-                cellPosition = grid.WorldToCell(pos);
-                pos = grid.CellToWorld(cellPosition);
-                pos.z = 10;
-                GameObject newObject = Instantiate(waterObject[0], pos, Quaternion.identity);
-                newObject.transform.parent = TileMap.transform;
+                StartCoroutine(Spawner());
+            }
+        }
+        //destory current map if it reach the end line
+        if (endLine != null)
+        {
+            if (endLine.GetComponent<EndLineController>().isEnded())
+            {
+                StartCoroutine(DestoryMap());
+                currentMap = nextMap;
             }
         }
     }
+    IEnumerator DestoryMap()
+    {
+        Destroy(currentMap);
+        yield return null;
+    }
 
-    //IEnumerator Spawner()
-    //{
+    IEnumerator Spawner()
+    {
+        int random = Random.Range(0, mapPrefabList.Length);
+        Debug.Log(mapPrefabList.Length);
+        Debug.Log(random);
+        //Todo: randomlize the map selector
+        GameObject randomMap = mapPrefabList[random];
 
-    //}
+        // spawn new map 
+        spawned = true;
 
-    // Update is called once per frame
+        float x = 0;
+        float y = Global.player.transform.position.y + mapOffset;
+        float z = 0;
+        Vector3 Spawn_Pos = new Vector3(x, y, z);
+        nextMap = Instantiate(randomMap, Spawn_Pos, Quaternion.identity);
+        nextMap.transform.parent = Global.TileMap.transform;
+
+
+        float elapsedTime = 0f;
+        while (elapsedTime < 0.5f)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        
+    }
 
 }
