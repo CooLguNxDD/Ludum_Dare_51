@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     }
     public void DestroyIt()
     {
+        this.tag = "Untagged";
+        this.GetComponent<Collider2D>().enabled = false;
         StartCoroutine(OnDestory());
     }
 
