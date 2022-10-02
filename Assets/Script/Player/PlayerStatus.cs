@@ -21,6 +21,7 @@ public class PlayerStatus : MonoBehaviour
         HP -= damage;
         currentDamage = damage;
         StartCoroutine(takeDamageAnimation());
+        Debug.Log(HP);
     }
 
     public void Update()
