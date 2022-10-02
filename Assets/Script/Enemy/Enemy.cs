@@ -26,9 +26,9 @@ public class Enemy : MonoBehaviour
     IEnumerator AttackPlayer()
     {
         isAttacking = true;
-        player.GetComponent<PlayerStatus>().TakeDamage((int)(attackDamage * Global.EnemyDamageMutiplyer));
-        yield return new WaitForSeconds(attackDuration);
         
+        yield return new WaitForSeconds(attackDuration);
+        player.GetComponent<PlayerStatus>().TakeDamage((int)(attackDamage * Global.EnemyDamageMutiplyer));
         isAttacking = false;
         yield return null;
     }

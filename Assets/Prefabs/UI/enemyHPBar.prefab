@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 3901738364489931222}
   - component: {fileID: 3901738364489931220}
   - component: {fileID: 3901738364489931219}
+  - component: {fileID: 159521789}
   m_Layer: 5
   m_Name: enemyHPBar
   m_TagString: Untagged
@@ -104,7 +105,7 @@ RectTransform:
   m_GameObject: {fileID: 3901738364489931208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 3901738363370054218}
   - {fileID: 3901738365186343997}
@@ -218,6 +219,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 3901738364489931220}
+  canvasGroup: {fileID: 159521789}
+--- !u!225 &159521789
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3901738364489931208}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &3901738365186343998
 GameObject:
   m_ObjectHideFlags: 0
