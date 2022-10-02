@@ -17,6 +17,9 @@ public class SpawnLineController : MonoBehaviour
         if (other.CompareTag("Player")){
             Debug.Log("Player entered spawn line");
             Spawned = true;
+            
+            Global.spawnNumber += 5;
+            Global.wavePerRound += 3;
         }
     }
     public bool isSpawned()

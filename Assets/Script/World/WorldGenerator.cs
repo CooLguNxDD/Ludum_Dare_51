@@ -48,6 +48,7 @@ public class WorldGenerator : MonoBehaviour
     }
     IEnumerator DestoryMap()
     {
+        currentMap.SetActive(false);
         Destroy(currentMap);
         yield return null;
     }
