@@ -7,11 +7,12 @@ public class ArrowSpawner : MonoBehaviour
     // Start is called before the first frame update
 
     public GameObject[] spawnPoint;
+    public GameObject enemyHPBar;
 
-    
+    private bool isEnemyHpBarActive = false;
+
     private int CurrentSpawnedCount = 0;
     private bool isSpawning = false;
-
 
     public float spawnSpeed = 0.25f;
 
@@ -33,14 +34,28 @@ public class ArrowSpawner : MonoBehaviour
         if (Global.ArrowsSpawningQueue.Count > 0 && !isSpawning && CurrentSpawnedCount < 6)
         {
             //Debug.Log("doing queue"+ Global.ArrowsSpawningQueue.Count);
+            if (Global.isEnemyHpBarActive) {
+                SpawnHpBar(Global.ArrowsSpawningQueue.Count);
+                Global.isEnemyHpBarActive = false;
+            }
 
             Arrows arrow = Global.ArrowsSpawningQueue.Dequeue();
             StartCoroutine(spawnArrowUI(arrow));
         }
+
     }
+    private void SpawnHpBar(int health)
+    {
+        enemyHPBar.GetComponent<EnemyHpBar>().SetHPBarAlpha(0.8f);
+        enemyHPBar.GetComponent<EnemyHpBar>().SetMaxHealth(health);
+        enemyHPBar.GetComponent<EnemyHpBar>().SetCurrentHealth(health);
+    }
+
     public void RemoveOneArrow()
     {
         Arrows current = Global.HoldingObject.Dequeue();
+
+        enemyHPBar.GetComponent<EnemyHpBar>().CurrentHealthMinusOne();
         StartCoroutine(destroyArrow(current.getObject()));
 
         int Counter = 0;
@@ -53,7 +68,7 @@ public class ArrowSpawner : MonoBehaviour
     }
     IEnumerator destroyArrow(GameObject Obj)
     {
-        LeanTween.moveY(Obj, 20, spawnSpeed);
+        LeanTween.moveY(Obj, transform.position.y+30, spawnSpeed);
         yield return new WaitForSeconds(spawnSpeed);
 
         Destroy(Obj);
@@ -67,12 +82,12 @@ public class ArrowSpawner : MonoBehaviour
         GameObject newArrow = Instantiate(arrows.getObject());
         newArrow.transform.SetParent(transform, false);
         float y = transform.position.y;
-        Debug.Log(y);
-        newArrow.transform.position = new Vector3(spawnPoint[CurrentSpawnedCount].transform.position.x, 15, transform.position.z);
-        Debug.Log(y);
+
+        newArrow.transform.position = new Vector3(spawnPoint[CurrentSpawnedCount].transform.position.x, transform.position.y+15, transform.position.z);
+
 
         //animation
-        LeanTween.moveY(newArrow, 8, 1).setEaseOutBounce();
+        LeanTween.moveY(newArrow, transform.position.y, 1).setEaseOutBounce();
 
 
         Global.HoldingObject.Enqueue(new Arrows(arrows.getDirection(), newArrow));

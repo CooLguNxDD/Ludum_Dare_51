@@ -16,16 +16,21 @@ public class Global : MonoBehaviour
     //enable battle queue
     public static bool isEmeny;
 
-
     public static Queue<Arrows> ArrowsSpawningQueue;
     public static Queue<Arrows> HoldingObject;
 
     [SerializeField]
     public static int spawnNumber;
 
-    public static List<Arrows> presetArrows;
-    
+    //enemy:
+    public static float EnemyHpMutiplyer = 1f;
+    public static float EnemyDamageMutiplyer = 1f;
 
+    //enemy hp bar
+    public static bool isEnemyHpBarActive = false;
+
+    //preset arrows
+    public static List<Arrows> presetArrows;
     public GameObject UpPrefab;
     public GameObject DownPrefab;
     public GameObject LeftPrefab;
@@ -41,9 +46,21 @@ public class Global : MonoBehaviour
         presetArrows.Add(new Arrows("left", LeftPrefab));
         presetArrows.Add(new Arrows("up", UpPrefab));
         presetArrows.Add(new Arrows("down", DownPrefab));
+
         spawnNumber = 10;
         player = playerCurrent;
         TileMap = TileMapCurrent;
         DontDestroyOnLoad(this);
+    }
+    public void Reset()
+    {
+        EnemyHpMutiplyer = 0.5f;
+        EnemyDamageMutiplyer = 0.5f;
+        ArrowsSpawningQueue = new Queue<Arrows>();
+        HoldingObject = new Queue<Arrows>();
+        spawnNumber = 10;
+        player = playerCurrent;
+        TileMap = TileMapCurrent;
+        isEmeny = false;
     }
 }
