@@ -23,8 +23,8 @@ public class Global : MonoBehaviour
     public static int spawnNumber;
 
     //enemy:
-    public static float EnemyHpMutiplyer = 1f;
-    public static float EnemyDamageMutiplyer = 1f;
+    public static float EnemyHpMutiplyer;
+    public static float EnemyDamageMutiplyer;
 
     //enemy hp bar
     public static bool isEnemyHpBarActive = false;
@@ -36,31 +36,60 @@ public class Global : MonoBehaviour
     public GameObject LeftPrefab;
     public GameObject RightPrefab;
 
+    //game stats:
+    public static Dictionary<string, int> enemyKilled;
+    public static int Score;
+    public static int Runned;
+
+    public static int HPRegenerateRate; 
+
+    //GameOver
+    public static bool GameOver =  false;
+
+    //wave
+    public static float wavePerRound;
+
     void Start()
     {
-        ArrowsSpawningQueue = new Queue<Arrows>();
-        HoldingObject = new Queue<Arrows>();
-
-        presetArrows = new List<Arrows> (); 
+        presetArrows = new List<Arrows>();
         presetArrows.Add(new Arrows("right", RightPrefab));
         presetArrows.Add(new Arrows("left", LeftPrefab));
         presetArrows.Add(new Arrows("up", UpPrefab));
         presetArrows.Add(new Arrows("down", DownPrefab));
 
-        spawnNumber = 10;
-        player = playerCurrent;
-        TileMap = TileMapCurrent;
+        Reset();
+
         DontDestroyOnLoad(this);
     }
+
     public void Reset()
     {
-        EnemyHpMutiplyer = 0.5f;
-        EnemyDamageMutiplyer = 0.5f;
+        Debug.Log("Resetting");
+        EnemyHpMutiplyer = 1f;
+        EnemyDamageMutiplyer = 1f;
+
         ArrowsSpawningQueue = new Queue<Arrows>();
         HoldingObject = new Queue<Arrows>();
-        spawnNumber = 10;
+        enemyKilled = new Dictionary<string, int>();
+
+        Score = 0;
+        Runned = 0;
+
+        spawnNumber = 8;
+        HPRegenerateRate = 2;
+        wavePerRound = 18;
         player = playerCurrent;
         TileMap = TileMapCurrent;
         isEmeny = false;
+
+        if (playerCurrent) player = playerCurrent;
+        else player = GameObject.FindGameObjectWithTag("player");
+        if (TileMapCurrent) TileMap = TileMapCurrent;
+        else TileMap = GameObject.FindGameObjectWithTag("Tile");
+
+        if (player)
+        {
+            player.transform.position = new Vector3(0, 0, 0);
+        }
     }
 }

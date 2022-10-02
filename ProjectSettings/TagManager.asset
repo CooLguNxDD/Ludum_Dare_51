@@ -6,6 +6,7 @@ TagManager:
   tags:
   - end_line
   - Enemy
+  - Tile
   layers:
   - Default
   - TransparentFX

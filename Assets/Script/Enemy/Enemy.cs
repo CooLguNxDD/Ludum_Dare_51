@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour
     public bool canAttack = false;
     public int attackDamage = 5;
     public float attackDuration = 0.5f;
+    public int Score;
+
+    public string type;
 
     private bool isAttacking = false;
     private GameObject player;
@@ -63,11 +66,25 @@ public class Enemy : MonoBehaviour
         StartCoroutine(OnDestory());
     }
 
+    public void Counter()
+    {
+        if (Global.enemyKilled.ContainsKey(type))
+        {
+            Global.enemyKilled[type] += 1;
+        }
+        else
+        {
+            Global.enemyKilled.Add(type, 1);
+        }
+    }
+
     IEnumerator OnDestory()
     {
         //some animation
 
         yield return new WaitForSeconds(0.5f);
         Destroy(this.gameObject);
+        Counter();
+        Global.Score += Score;
     }
 }

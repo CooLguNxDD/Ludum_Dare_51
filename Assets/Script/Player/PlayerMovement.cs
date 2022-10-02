@@ -54,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-
     private void Encounter()
     {
         if (Global.HoldingObject.Count == 0 && Global.ArrowsSpawningQueue.Count == 0) {
@@ -166,6 +165,12 @@ public class PlayerMovement : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+        if (Global.Runned < (int)transform.position.y) {
+            Global.Runned = (int)transform.position.y;
+            Global.Score += 5;
+        }
+        
+        
         isMovingY = false;
     }
 
