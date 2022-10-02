@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 9028961160092050747}
-  additionalHP: -2
+  additionalHP: -3
   canAttack: 1
   attackDamage: 10
   attackDuration: 2

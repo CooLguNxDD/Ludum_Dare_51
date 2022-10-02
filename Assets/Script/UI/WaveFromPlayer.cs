@@ -57,7 +57,7 @@ public class WaveFromPlayer : MonoBehaviour
         if (Global.GameOver)
         {
             BG.volume = 0.5f;
-            WaveComing.volume = 0f;
+            WaveComing.volume = 0;
             
         }
         

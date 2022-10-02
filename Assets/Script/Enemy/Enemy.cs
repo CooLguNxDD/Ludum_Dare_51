@@ -61,6 +61,7 @@ public class Enemy : MonoBehaviour
     public void DestroyIt()
     {
         animator.SetBool("died", true);
+        attackDamage = 0;
         this.tag = "Untagged";
         this.GetComponent<Collider2D>().enabled = false;
         StartCoroutine(OnDestory());

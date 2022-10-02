@@ -14,11 +14,12 @@ public class SpawnLineController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")){
+        if (other.CompareTag("Player") && !Spawned)
+        {
             Debug.Log("Player entered spawn line");
             Spawned = true;
             
-            Global.spawnNumber += 5;
+            Global.spawnNumber += 3;
             Global.wavePerRound += 3;
         }
     }
