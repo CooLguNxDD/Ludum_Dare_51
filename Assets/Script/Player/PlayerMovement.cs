@@ -7,16 +7,12 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
 
     public float moveSpeed = 1f;
-
-
     public int moveGrid = 1;
-    
-    public bool isMovingX = false;
-    public bool isMovingY = false;
-
-    private bool isWall = false;
-
     public GameObject ArrowSpawnPoint;
+
+    private bool isMovingX = false;
+    private bool isMovingY = false;
+    private bool isWall = false;
 
     private GameObject Enemy;
     private float endTime = 0;
@@ -44,29 +40,21 @@ public class PlayerMovement : MonoBehaviour
         {
             Global.isEmeny = true;
             Enemy = collision.collider.gameObject;
-            AddArrowsToQueue();
+            Debug.Log("isEmeny" + Global.isEmeny);
         }
         else
         {
             isWall = true;
-            Debug.Log("enter" + isWall);
         }
 
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
         isWall = false;
-        Debug.Log("exit"+ isWall);
+
     }
 
-    private void AddArrowsToQueue()
-    {
-        for (int i = 0; i < Global.spawnNumber; i++)
-        {
-            int random = Random.Range(0, Global.presetArrows.Count);
-            Global.ArrowsSpawningQueue.Enqueue(Global.presetArrows[random]);
-        }
-    }
+
     private void Encounter()
     {
         if (Global.HoldingObject.Count == 0 && Global.ArrowsSpawningQueue.Count == 0) {
@@ -75,30 +63,46 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (Global.HoldingObject.Count > 0 && Global.HoldingObject.Peek().getDirection() == "right" &&
+        else if (Global.HoldingObject.Count > 0 && Global.HoldingObject.Peek().getDirection() == "right" &&
             (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))){
             KillOneArrow();
         }
-        if (Global.HoldingObject.Count > 0 && Global.HoldingObject.Peek().getDirection() == "left" &&
+        else if (Global.HoldingObject.Count > 0 && Global.HoldingObject.Peek().getDirection() == "left" &&
     (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)))
         {
             KillOneArrow();
         }
-        if (Global.HoldingObject.Count > 0 && Global.HoldingObject.Peek().getDirection() == "up" &&
+        else if (Global.HoldingObject.Count > 0 && Global.HoldingObject.Peek().getDirection() == "up" &&
     (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
         {
             KillOneArrow();
         }
-        if (Global.HoldingObject.Count > 0 && Global.HoldingObject.Peek().getDirection() == "down" &&
+        else if (Global.HoldingObject.Count > 0 && Global.HoldingObject.Peek().getDirection() == "down" &&
     (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)))
         {
             KillOneArrow();
+        }
+        else if(Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) ||
+                Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) ||
+                Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            this.GetComponent<PlayerStatus>().TakeDamage(1);
         }
 
     }
     private void KillOneArrow()
     {
+        StartCoroutine(EnemyRedAnimation());
         ArrowSpawnPoint.GetComponent<ArrowSpawner>().RemoveOneArrow();
+    }
+
+    IEnumerator EnemyRedAnimation()
+    {
+        Enemy.GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(0.15f);
+        Enemy.GetComponent<SpriteRenderer>().color = Color.yellow;
+        yield return new WaitForSeconds(0.05f);
+        Enemy.GetComponent<SpriteRenderer>().color = Color.white;
     }
     private void Movement()
     {
