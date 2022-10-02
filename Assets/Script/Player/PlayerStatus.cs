@@ -14,6 +14,8 @@ public class PlayerStatus : MonoBehaviour
     public GameObject playerHPBarInner;
     public GameObject endGameUI;
 
+    public AudioSource Hurt;
+
     public int GetHP() { return HP; }
 
     private float value;
@@ -32,15 +34,15 @@ public class PlayerStatus : MonoBehaviour
     {
         HP -= damage;
         currentDamage = damage;
+        Hurt.Play();
         StartCoroutine(takeDamageAnimation());
         if (HP <= 0 && !isEnd)
         {
+            Global.GameOver = true;
             endGameUI.GetComponent<gameOverUi>().Ending();
             isEnd = true;
         }
     }
-
-
     IEnumerator HealthRegenerate()
     {
         isRegenerating = true;

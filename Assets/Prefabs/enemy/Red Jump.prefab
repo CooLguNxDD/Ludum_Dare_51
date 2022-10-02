@@ -143,9 +143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5093626711807398955}
-  additionalHP: -2
+  additionalHP: -3
   canAttack: 1
-  attackDamage: 10
+  attackDamage: 15
   attackDuration: 1
   Score: 300
   type: red

@@ -145,7 +145,7 @@ MonoBehaviour:
   animator: {fileID: 2914828020885846766}
   additionalHP: 0
   canAttack: 1
-  attackDamage: 2
+  attackDamage: 5
   attackDuration: 2
   Score: 75
   type: blue
