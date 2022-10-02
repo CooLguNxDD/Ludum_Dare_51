@@ -10,6 +10,13 @@ public class PlayerMovement : MonoBehaviour
     public int moveGrid = 1;
     public GameObject ArrowSpawnPoint;
 
+    public Sprite up;
+    public Sprite down;
+    public Sprite left;
+    public Sprite right;
+
+    private SpriteRenderer characImage;
+
     private bool isMovingX = false;
     private bool isMovingY = false;
     private bool isWall = false;
@@ -20,9 +27,17 @@ public class PlayerMovement : MonoBehaviour
     private Vector3Int PlayerCellPosition;
     private Vector3Int PreviousPlayerCellPosition;
 
+    public AudioSource walkAudio;
+
+    public AudioSource hit1;
+    public AudioSource hit2;
+    public AudioSource hit3;
+    public AudioSource hit4;
+
 
     void Start()
     {
+        characImage = GetComponent<SpriteRenderer>();
         grid = transform.GetComponentInParent<GridLayout>();
         endTime = 5 / moveSpeed;
     }
@@ -65,27 +80,31 @@ public class PlayerMovement : MonoBehaviour
         else if (Global.HoldingObject.Count > 0 && Global.HoldingObject.Peek().getDirection() == "right" &&
             (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))){
             KillOneArrow();
+            hit1.Play();
         }
         else if (Global.HoldingObject.Count > 0 && Global.HoldingObject.Peek().getDirection() == "left" &&
     (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)))
         {
             KillOneArrow();
+            hit2.Play();
         }
         else if (Global.HoldingObject.Count > 0 && Global.HoldingObject.Peek().getDirection() == "up" &&
     (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)))
         {
             KillOneArrow();
+            hit3.Play();
         }
         else if (Global.HoldingObject.Count > 0 && Global.HoldingObject.Peek().getDirection() == "down" &&
     (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)))
         {
             KillOneArrow();
+            hit4.Play();
         }
         else if(Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) ||
                 Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) ||
                 Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            this.GetComponent<PlayerStatus>().TakeDamage(1);
+            this.GetComponent<PlayerStatus>().TakeDamage(Global.MissArrowDamage);
         }
 
     }
@@ -122,11 +141,13 @@ public class PlayerMovement : MonoBehaviour
             //left right
             if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f && !isMovingX && !isMovingY)
             {
+                walkAudio.Play();
                 StartCoroutine(MovementX());
             }
             //up down
             if (Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f && !isMovingY && !isMovingX)
             {
+                walkAudio.Play();
                 StartCoroutine(MovementY());
             }
         }
@@ -134,6 +155,10 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator MovementX()
     {
+        // set sprite
+        if (Input.GetAxisRaw("Horizontal") > 0) characImage.sprite = right;
+        if (Input.GetAxisRaw("Horizontal") < 0) characImage.sprite = left;
+
         // move in grid
         PreviousPlayerCellPosition = PlayerCellPosition;
         isMovingX = true;
@@ -152,6 +177,11 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator MovementY()
     {
+
+        // set sprite
+        if (Input.GetAxisRaw("Vertical") > 0) characImage.sprite = up;
+        if (Input.GetAxisRaw("Vertical") < 0) characImage.sprite = down;
+
         // move in grid
         PreviousPlayerCellPosition = PlayerCellPosition;
         isMovingY = true;

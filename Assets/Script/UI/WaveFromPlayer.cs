@@ -11,17 +11,22 @@ public class WaveFromPlayer : MonoBehaviour
     public GameObject distanceText;
     public float tweenTime;
 
+    public float triggerDistance;
+
     private float distance;
     private TextMeshProUGUI text;
     private bool Tweening = false;
+
+    public AudioSource BG;
+    public AudioSource WaveComing;
 
     void Awake()
     {
         distance = 0;
         Tweening = false;
         text = distanceText.GetComponent<TextMeshProUGUI>();
-        
     }
+
     public void TweenUp()
     {
         LeanTween.scale(gameObject, new Vector3(1.5f, 1.5f, 1.5f), tweenTime).setEaseInSine();
@@ -35,13 +40,33 @@ public class WaveFromPlayer : MonoBehaviour
     void FixedUpdate()
     {
         distance = player.transform.position.y - wave.transform.position.y - 10;
+
+        if(distance < triggerDistance)
+        {
+            if (WaveComing.volume < 1) WaveComing.volume += (Time.deltaTime / 5);
+            
+            BG.volume = 1 * (distance / triggerDistance) * 0.25f;
+        }
+        else
+        {
+            if (WaveComing.volume > 0) WaveComing.volume -= (Time.deltaTime);
+            
+            BG.volume = 0.5f;
+        }
+
+        if (Global.GameOver)
+        {
+            BG.volume = 0.5f;
+            WaveComing.volume = 0f;
+            
+        }
         
-        if (distance < 15 && !Tweening)
+        if (distance < triggerDistance && !Tweening)
         {
             StartCoroutine(TweenAdjustor());
             text.color = Color.red;
         }
-        else if (distance > 15) text.color = Color.blue;
+        else if (distance > triggerDistance) text.color = Color.blue;
 
         text.SetText("WAVE: " + (int)distance + " M");
 
@@ -54,7 +79,5 @@ public class WaveFromPlayer : MonoBehaviour
         TweenDown();
         yield return new WaitForSeconds(tweenTime);
         Tweening = false;
-
-
     }
 }

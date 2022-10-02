@@ -146,6 +146,6 @@ MonoBehaviour:
   additionalHP: -2
   canAttack: 1
   attackDamage: 10
-  attackDuration: 2.5
+  attackDuration: 2
   Score: 200
   type: red

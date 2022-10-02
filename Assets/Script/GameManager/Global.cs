@@ -21,6 +21,9 @@ public class Global : MonoBehaviour
 
     [SerializeField]
     public static int spawnNumber;
+    //player
+    public static int MissArrowDamage;
+    public static int HPRegenerateRate;
 
     //enemy:
     public static float EnemyHpMutiplyer;
@@ -41,7 +44,7 @@ public class Global : MonoBehaviour
     public static int Score;
     public static int Runned;
 
-    public static int HPRegenerateRate; 
+    
 
     //GameOver
     public static bool GameOver =  false;
@@ -75,12 +78,17 @@ public class Global : MonoBehaviour
         Score = 0;
         Runned = 0;
 
+        MissArrowDamage = 3;
+        HPRegenerateRate = 5;
+
         spawnNumber = 8;
-        HPRegenerateRate = 2;
-        wavePerRound = 18;
+
+        wavePerRound = 17;
         player = playerCurrent;
         TileMap = TileMapCurrent;
         isEmeny = false;
+
+        GameOver = false;
 
         if (playerCurrent) player = playerCurrent;
         else player = GameObject.FindGameObjectWithTag("player");
