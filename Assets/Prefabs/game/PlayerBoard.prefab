@@ -161,6 +161,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
+  playerHPBar: {fileID: 0}
+  playerHPBarInner: {fileID: 0}
 --- !u!1 &880792739233131911
 GameObject:
   m_ObjectHideFlags: 0
