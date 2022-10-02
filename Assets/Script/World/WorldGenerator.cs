@@ -65,7 +65,7 @@ public class WorldGenerator : MonoBehaviour
         spawned = true;
 
         float x = 0;
-        float y = Global.player.transform.position.y + mapOffset;
+        float y = spawnLine.transform.position.y + mapOffset;
         float z = 0;
         Vector3 Spawn_Pos = new Vector3(x, y, z);
         nextMap = Instantiate(randomMap, Spawn_Pos, Quaternion.identity);
