@@ -94,8 +94,6 @@ public class Global : MonoBehaviour
         HoldingObject = new Queue<Arrows>();
         enemyKilled = new Dictionary<string, int>();
 
-
-        
         Score = 0;
         Runned = 0;
 
@@ -104,7 +102,7 @@ public class Global : MonoBehaviour
 
         spawnNumber = 8;
 
-        wavePerRound = 17;
+        wavePerRound = 15;
         player = playerCurrent;
         TileMap = TileMapCurrent;
         isEmeny = false;
