@@ -82,10 +82,10 @@ public class Enemy : MonoBehaviour
     IEnumerator OnDestory()
     {
         //some animation
-
+        Global.Score += (int)(Score * Global.ScoreMutiply);
         yield return new WaitForSeconds(0.5f);
         Destroy(this.gameObject);
         Counter();
-        Global.Score += Score;
+        
     }
 }

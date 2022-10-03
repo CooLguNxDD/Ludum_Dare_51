@@ -39,13 +39,14 @@ public class PlayerMovement : MonoBehaviour
     {
         characImage = GetComponent<SpriteRenderer>();
         grid = transform.GetComponentInParent<GridLayout>();
-        endTime = 5 / moveSpeed;
-    }
+        endTime = 5 / (moveSpeed * Global.PlayerMoveSpeedMutliplyer);
+
+}
 
     // Update is called once per frame
     void Update()
     { 
-        endTime = 5 / moveSpeed;
+        endTime = 5 / (moveSpeed * Global.PlayerMoveSpeedMutliplyer) ;
         Movement();
     }
 
@@ -152,24 +153,26 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
     private IEnumerator MovementX()
     {
+        
         // set sprite
         if (Input.GetAxisRaw("Horizontal") > 0) characImage.sprite = right;
         if (Input.GetAxisRaw("Horizontal") < 0) characImage.sprite = left;
 
         // move in grid
         PreviousPlayerCellPosition = PlayerCellPosition;
+
         isMovingX = true;
-        PlayerCellPosition += new Vector3Int((int)(Input.GetAxisRaw("Horizontal")) * moveGrid, 0, 0);
+        PlayerCellPosition += new Vector3Int((int)(Input.GetAxisRaw("Horizontal") * moveGrid * (int)Global.PlayerMoveGridMutliplyer), 0, 0);
 
         float elapsedTime = 0;
         
         while (elapsedTime < endTime)
         {
             elapsedTime += Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, grid.CellToWorld(PlayerCellPosition), moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, grid.CellToWorld(PlayerCellPosition),
+                moveSpeed * Global.PlayerMoveSpeedMutliplyer * Time.deltaTime);
             yield return null;
         }
         isMovingX = false;
@@ -185,19 +188,20 @@ public class PlayerMovement : MonoBehaviour
         // move in grid
         PreviousPlayerCellPosition = PlayerCellPosition;
         isMovingY = true;
-        PlayerCellPosition += new Vector3Int(0, (int)(Input.GetAxisRaw("Vertical")) * moveGrid, 0);
+        PlayerCellPosition += new Vector3Int(0, (int)(Input.GetAxisRaw("Vertical")) * moveGrid * (int)Global.PlayerMoveGridMutliplyer, 0);
 
         float elapsedTime = 0;
 
         while (elapsedTime < endTime)
         {
-            transform.position = Vector3.MoveTowards(transform.position, grid.CellToWorld(PlayerCellPosition), moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, grid.CellToWorld(PlayerCellPosition),
+                moveSpeed * Global.PlayerMoveSpeedMutliplyer * Time.deltaTime);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
         if (Global.Runned < (int)transform.position.y) {
             Global.Runned = (int)transform.position.y;
-            Global.Score += 5;
+            Global.Score += (int)(5 * Global.ScoreMutiply);
         }
         
         
