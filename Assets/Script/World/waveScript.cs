@@ -33,6 +33,7 @@ public class waveScript : MonoBehaviour
     {
         isNextWave = true;
         waveOffset = (Mathf.Log(Global.wavePerRound  + 2));
+        Debug.Log(Global.wavePerRound);
         yield return new WaitForSeconds(10);
         nextPos = new Vector3(transform.position.x, transform.position.y + Global.wavePerRound, transform.position.z);
         isNextWave = false;

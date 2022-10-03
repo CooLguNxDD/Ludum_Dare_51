@@ -102,7 +102,8 @@ public class Global : MonoBehaviour
 
         spawnNumber = 8;
 
-        wavePerRound = 12;
+        wavePerRound = 13;
+
         player = playerCurrent;
         TileMap = TileMapCurrent;
         isEmeny = false;
