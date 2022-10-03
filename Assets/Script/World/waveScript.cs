@@ -10,6 +10,7 @@ public class waveScript : MonoBehaviour
 
     private Vector3 nextPos;
     private bool isNextWave;
+    private float waveOffset = 0f;
     void Start()
     {
         nextPos = transform.position;
@@ -24,13 +25,16 @@ public class waveScript : MonoBehaviour
         }
         if (transform.position.y < nextPos.y)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * waveMoveSpeed * (Mathf.Log10(Global.wavePerRound + 10)), transform.position.z);
+
+            Debug.Log(waveOffset);
+            transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * waveMoveSpeed * (waveOffset), transform.position.z);
         }
     }
 
     IEnumerator waveMovement()
     {
         isNextWave = true;
+        waveOffset = (Mathf.Log(Global.wavePerRound  + 2));
         yield return new WaitForSeconds(10);
         nextPos = new Vector3(transform.position.x, transform.position.y + Global.wavePerRound, transform.position.z);
         isNextWave = false;

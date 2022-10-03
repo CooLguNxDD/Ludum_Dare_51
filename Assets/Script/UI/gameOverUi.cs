@@ -16,19 +16,24 @@ public class gameOverUi : MonoBehaviour
     public GameObject totalScore;
     public GameObject walked;
 
+    public Button button;
+
     public void Awake()
     {
         canvasGroup.alpha = 0;
+        button.enabled = false;
 
     }
 
     public void SetAlpha(float alpha)
     {
+        button.enabled = false;
         canvasGroup.alpha = alpha;
     }
 
     public void Ending()
     {
+        button.enabled = true;
         SetAlpha(1);
         Vector3 currentPos = this.gameObject.transform.position;
         transform.position = new Vector3(currentPos.x, currentPos.y + 5, currentPos.z);
