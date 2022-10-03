@@ -14,45 +14,48 @@ public class GlobalEvent : MonoBehaviour
         isEventOccurs = false;
         Global.newEvents = new List<NewEvents>();
 
-        Global.newEvents.Add(new NewEvents(" Enemy has 3x damage !!!", EnemyDamageMulti(3f)));
-        Global.newEvents.Add(new NewEvents(" Enemy has 2x damage !!!", EnemyDamageMulti(2f)));
-        Global.newEvents.Add(new NewEvents(" Enemy has 0.5x damage !!!", EnemyDamageMulti(0.5f)));
+        //Global.newEvents.Add(new NewEvents(" Enemy has 3x damage !!!", EnemyDamageMulti(3f)));
+        //Global.newEvents.Add(new NewEvents(" Enemy has 2x damage !!!", EnemyDamageMulti(2f)));
+        //Global.newEvents.Add(new NewEvents(" Enemy has 0.5x damage !!!", EnemyDamageMulti(0.5f)));
 
-        Global.newEvents.Add(new NewEvents(" player now takes 3x damage !!!", PlayerDamageTake(3f)));
-        Global.newEvents.Add(new NewEvents(" player now takes 2x damage !!!", PlayerDamageTake(2f)));
-        Global.newEvents.Add(new NewEvents(" player now takes 0.5x damage !!!", PlayerDamageTake(0.5f)));
+        //Global.newEvents.Add(new NewEvents(" player now takes 3x damage !!!", PlayerDamageTake(3f)));
+        //Global.newEvents.Add(new NewEvents(" player now takes 2x damage !!!", PlayerDamageTake(2f)));
+        //Global.newEvents.Add(new NewEvents(" player now takes 0.5x damage !!!", PlayerDamageTake(0.5f)));
 
-        Global.newEvents.Add(new NewEvents(" player has 3x speed !!!", PlayerSpeedMulti(3f)));
-        Global.newEvents.Add(new NewEvents(" player has 2x speed !!!", PlayerSpeedMulti(2f)));
-        Global.newEvents.Add(new NewEvents(" player has 0.5x speed !!!", PlayerSpeedMulti(0.5f)));
+        //Global.newEvents.Add(new NewEvents(" player has 3x speed !!!", PlayerSpeedMulti(3f)));
+        //Global.newEvents.Add(new NewEvents(" player has 2x speed !!!", PlayerSpeedMulti(2f)));
+        //Global.newEvents.Add(new NewEvents(" player has 0.5x speed !!!", PlayerSpeedMulti(0.5f)));
 
-        Global.newEvents.Add(new NewEvents(" Enemy has DOUBLE HP !!!", DoubleEnemyHP()));
-        Global.newEvents.Add(new NewEvents(" Enemy has HALF HP !!!", halfEnemyHP()));
+        //Global.newEvents.Add(new NewEvents(" Enemy has DOUBLE HP !!!", DoubleEnemyHP()));
+        //Global.newEvents.Add(new NewEvents(" Enemy has HALF HP !!!", halfEnemyHP()));
 
-        Global.newEvents.Add(new NewEvents(" Mis-Clicked Arrow deals 10 Damage !!!", ArrowDamage(10)));
-        Global.newEvents.Add(new NewEvents(" Mis-Clicked Arrow deals 5 Damage", ArrowDamage(5)));
-        Global.newEvents.Add(new NewEvents(" Mis-Clicked Arrow deals 1 Damage", ArrowDamage(1)));
+        //Global.newEvents.Add(new NewEvents(" Mis-Clicked Arrow deals 10 Damage !!!", ArrowDamage(10)));
+        //Global.newEvents.Add(new NewEvents(" Mis-Clicked Arrow deals 5 Damage", ArrowDamage(5)));
+        //Global.newEvents.Add(new NewEvents(" Mis-Clicked Arrow deals 1 Damage", ArrowDamage(1)));
 
-        Global.newEvents.Add(new NewEvents(" Health Regeneration ++ !!!", Regeneration(20)));
-        Global.newEvents.Add(new NewEvents(" Health Regeneration + !!!", Regeneration(8)));
-        Global.newEvents.Add(new NewEvents(" Health Regeneration + !!!", Regeneration(8)));
-        Global.newEvents.Add(new NewEvents(" Health Regeneration -", Regeneration(1)));
-
-        Global.newEvents.Add(new NewEvents(" Next Wave will move even faster ++ !!!", WaveMove(25)));
-        Global.newEvents.Add(new NewEvents(" Next Wave will move faster + !!!", WaveMove(20)));
-        Global.newEvents.Add(new NewEvents(" Next Wave will move slower!!!", WaveMove(10)));
-        Global.newEvents.Add(new NewEvents(" Next Wave will stop!!!", WaveMove(0)));
+        //Global.newEvents.Add(new NewEvents(" Health Regeneration ++ !!!", Regeneration(20)));
+        //Global.newEvents.Add(new NewEvents(" Health Regeneration + !!!", Regeneration(8)));
+        //Global.newEvents.Add(new NewEvents(" Health Regeneration + !!!", Regeneration(8)));
+        //Global.newEvents.Add(new NewEvents(" Health Regeneration -", Regeneration(1)));
 
 
-        Global.newEvents.Add(new NewEvents(" No Event ", noEvent()));
-        Global.newEvents.Add(new NewEvents(" No Event ", noEvent()));
-        Global.newEvents.Add(new NewEvents(" No Event ", noEvent()));
-        Global.newEvents.Add(new NewEvents(" No Event ", noEvent()));
-        Global.newEvents.Add(new NewEvents(" No Event ", noEvent()));
+        Global.newEvents.Add(new NewEvents(" A Strong Wave is incoming !!!", WaveMove(30)));
 
-        Global.newEvents.Add(new NewEvents(" Score 5x", ScoreMultiply(5f)));
-        Global.newEvents.Add(new NewEvents(" Score 3x", ScoreMultiply(3f)));
-        Global.newEvents.Add(new NewEvents(" Score 2x", ScoreMultiply(2f)));
+        Global.newEvents.Add(new NewEvents(" Next Wave will move even faster ++ !!!", WaveMove(10)));
+        Global.newEvents.Add(new NewEvents(" Next Wave will move faster + !!!", WaveMove(5)));
+        Global.newEvents.Add(new NewEvents(" Next Wave will move slower!!!", WaveMove(-5)));
+        Global.newEvents.Add(new NewEvents(" Next Wave will move more slower !!!", WaveMove(-10)));
+
+
+        //Global.newEvents.Add(new NewEvents(" No Event ", noEvent()));
+        //Global.newEvents.Add(new NewEvents(" No Event ", noEvent()));
+        //Global.newEvents.Add(new NewEvents(" No Event ", noEvent()));
+        //Global.newEvents.Add(new NewEvents(" No Event ", noEvent()));
+        //Global.newEvents.Add(new NewEvents(" No Event ", noEvent()));
+
+        //Global.newEvents.Add(new NewEvents(" Score 5x", ScoreMultiply(5f)));
+        //Global.newEvents.Add(new NewEvents(" Score 3x", ScoreMultiply(3f)));
+        //Global.newEvents.Add(new NewEvents(" Score 2x", ScoreMultiply(2f)));
 
         //bugged
         //Global.newEvents.Add(new NewEvents(" player now move 3 Grids/Move !!!", PlayerGridMulti(3f)));
@@ -133,8 +136,6 @@ public class GlobalEvent : MonoBehaviour
         Global.EnemyDamageMutiplyer = 1f;
         isEventOccurs = false;
     }
-
-
 
     IEnumerable noEvent()
     {
