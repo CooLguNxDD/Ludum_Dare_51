@@ -16,8 +16,6 @@ public class ArrowSpawner : MonoBehaviour
 
     public Queue<Arrows> HoldingObject;
 
-    public ParticleSystem particle;
-
     
     private void Awake()
     {
@@ -26,7 +24,6 @@ public class ArrowSpawner : MonoBehaviour
     void Start()
     {
         //todo random;
-        particle.Stop();
     }
 
     // Update is called once per frame
@@ -54,7 +51,6 @@ public class ArrowSpawner : MonoBehaviour
 
     public void RemoveOneArrow()
     {
-        particle.Play();
         Arrows current = Global.HoldingObject.Dequeue();
 
         enemyHPBar.GetComponent<EnemyHpBar>().CurrentHealthMinusOne();
@@ -83,19 +79,13 @@ public class ArrowSpawner : MonoBehaviour
         //spawn arrow from queue;
         GameObject newArrow = Instantiate(arrows.getObject());
         newArrow.transform.SetParent(transform, false);
-        
+        float y = transform.position.y;
 
-        RectTransform rect = newArrow.GetComponent<RectTransform>();
-        float target_y = rect.position.y;
-        float target_z = rect.position.z;
+        newArrow.transform.position = new Vector3(spawnPoint[CurrentSpawnedCount].transform.position.x, transform.position.y+15, transform.position.z);
 
-        RectTransform rectSpawn = spawnPoint[CurrentSpawnedCount].GetComponent<RectTransform>();
-        float target_x = rectSpawn.position.x;
-
-        newArrow.transform.position = new Vector3(target_x, target_y + 15, target_z);
 
         //animation
-        LeanTween.moveY(rect, target_y, 1).setEaseOutBounce();
+        LeanTween.moveY(newArrow, transform.position.y, 1).setEaseOutBounce();
 
 
         Global.HoldingObject.Enqueue(new Arrows(arrows.getDirection(), newArrow));
