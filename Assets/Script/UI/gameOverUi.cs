@@ -34,9 +34,14 @@ public class gameOverUi : MonoBehaviour
     {
         button.enabled = true;
         SetAlpha(1);
-        Vector3 currentPos = this.gameObject.transform.position;
-        transform.position = new Vector3(currentPos.x, currentPos.y + 5, currentPos.z);
-        LeanTween.moveLocalY(this.gameObject, currentPos.y, 2).setEaseInOutBack();
+
+        RectTransform rect = this.GetComponent<RectTransform>();
+
+        Vector3 currentPos = this.GetComponent<RectTransform>().position;
+
+        rect.position = new Vector3(rect.position.x, rect.position.y + 10, rect.position.z);
+
+        LeanTween.moveY(rect, currentPos.y, 2).setEaseInOutBack();
 
         walked.GetComponent<TextMeshProUGUI>().SetText("You Runned: " + Global.Runned + " M");
 
