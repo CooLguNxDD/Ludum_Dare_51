@@ -22,6 +22,7 @@ public class ArrowSpawner : MonoBehaviour
     private void Awake()
     {
         isSpawning = false;
+        particle.Stop();
     }
     void Start()
     {
