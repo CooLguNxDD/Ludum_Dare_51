@@ -27,7 +27,6 @@ public class gameOverUi : MonoBehaviour
 
     public void SetAlpha(float alpha)
     {
-        button.enabled = false;
         canvasGroup.alpha = alpha;
     }
 
