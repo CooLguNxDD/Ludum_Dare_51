@@ -4,33 +4,23 @@ using UnityEngine;
 
 public class Global : MonoBehaviour
 {
+
+    public static List<NewEvents> newEvents;
+    public static NewEvents currentEvent;
+    
+    //global object
     [SerializeField]
     private GameObject playerCurrent;
     [SerializeField]
     private GameObject TileMapCurrent;
 
-    //Global variable
     public static GameObject player;
     public static GameObject TileMap;
 
     //enable battle queue
     public static bool isEmeny;
-
     public static Queue<Arrows> ArrowsSpawningQueue;
     public static Queue<Arrows> HoldingObject;
-
-    [SerializeField]
-    public static int spawnNumber;
-    //player
-    public static int MissArrowDamage;
-    public static int HPRegenerateRate;
-
-    //enemy:
-    public static float EnemyHpMutiplyer;
-    public static float EnemyDamageMutiplyer;
-
-    //enemy hp bar
-    public static bool isEnemyHpBarActive = false;
 
     //preset arrows
     public static List<Arrows> presetArrows;
@@ -39,27 +29,49 @@ public class Global : MonoBehaviour
     public GameObject LeftPrefab;
     public GameObject RightPrefab;
 
+
+
+    //global variable
+    [SerializeField]
+
+    public static int spawnNumber;
+    //player
+    public static int MissArrowDamage;
+    public static int HPRegenerateRate;
+
+    public static float PlayerTakeDamagerMutliplyer;
+    public static float PlayerMoveGridMutliplyer;
+    public static float PlayerMoveSpeedMutliplyer;
+
+    //enemy:
+    public static float EnemyHpMutiplyer;
+    public static float EnemyDamageMutiplyer;
+
+    //enemy hp bar
+    public static bool isEnemyHpBarActive = false;
+
     //game stats:
+    public static float ScoreMutiply = 1f;
     public static Dictionary<string, int> enemyKilled;
     public static int Score;
     public static int Runned;
 
-    
-
     //GameOver
-    public static bool GameOver =  false;
+    public static bool GameOver;
 
     //wave
     public static float wavePerRound;
 
     void Start()
     {
+        
         presetArrows = new List<Arrows>();
         presetArrows.Add(new Arrows("right", RightPrefab));
         presetArrows.Add(new Arrows("left", LeftPrefab));
         presetArrows.Add(new Arrows("up", UpPrefab));
         presetArrows.Add(new Arrows("down", DownPrefab));
 
+        
         Reset();
 
         DontDestroyOnLoad(this);
@@ -67,14 +79,23 @@ public class Global : MonoBehaviour
 
     public void Reset()
     {
+
         Debug.Log("Resetting");
         EnemyHpMutiplyer = 1f;
         EnemyDamageMutiplyer = 1f;
+        PlayerTakeDamagerMutliplyer = 1f;
+
+        PlayerMoveGridMutliplyer = 1f;
+        PlayerMoveSpeedMutliplyer = 1f;
+
+        ScoreMutiply = 1f;
 
         ArrowsSpawningQueue = new Queue<Arrows>();
         HoldingObject = new Queue<Arrows>();
         enemyKilled = new Dictionary<string, int>();
 
+
+        
         Score = 0;
         Runned = 0;
 
@@ -87,6 +108,7 @@ public class Global : MonoBehaviour
         player = playerCurrent;
         TileMap = TileMapCurrent;
         isEmeny = false;
+        isEnemyHpBarActive = false;
 
         GameOver = false;
 

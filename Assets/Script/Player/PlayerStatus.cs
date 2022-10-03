@@ -32,8 +32,8 @@ public class PlayerStatus : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        HP -= damage;
-        currentDamage = damage;
+        HP -= (int)(damage * Global.PlayerTakeDamagerMutliplyer);
+        currentDamage = (int)(damage * Global.PlayerTakeDamagerMutliplyer);
         Hurt.Play();
         StartCoroutine(takeDamageAnimation());
         if (HP <= 0 && !isEnd)
@@ -71,7 +71,7 @@ public class PlayerStatus : MonoBehaviour
     }
     IEnumerator takeDamageAnimation() {
         playerHPBarInner.GetComponent<Image>().color = Color.red;
-        yield return new WaitForSeconds(0.5f * Mathf.Log(currentDamage + 1));
+        yield return new WaitForSeconds(0.25f * Mathf.Log(currentDamage + 1));
         playerHPBarInner.GetComponent<Image>().color = Color.green;
     }
     public void Start()
