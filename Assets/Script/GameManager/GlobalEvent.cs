@@ -69,9 +69,9 @@ public class GlobalEvent : MonoBehaviour
 
     IEnumerable WaveMove(int wave)
     {
-        Global.wavePerRound = wave;
+        Global.wavePerRound += wave;
         yield return new WaitForSeconds(waitSecond);
-        Global.wavePerRound = 17;
+        Global.wavePerRound -= wave;
         isEventOccurs = false;
     }
     IEnumerable Regeneration(int hp)
