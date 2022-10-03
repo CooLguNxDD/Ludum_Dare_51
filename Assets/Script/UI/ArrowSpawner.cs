@@ -9,8 +9,6 @@ public class ArrowSpawner : MonoBehaviour
     public GameObject[] spawnPoint;
     public GameObject enemyHPBar;
 
-    private bool isEnemyHpBarActive = false;
-
     private int CurrentSpawnedCount = 0;
     private bool isSpawning = false;
 
