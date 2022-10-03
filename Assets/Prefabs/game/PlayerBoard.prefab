@@ -180,7 +180,7 @@ MonoBehaviour:
   playerHPBar: {fileID: 0}
   playerHPBarInner: {fileID: 0}
   endGameUI: {fileID: 0}
-  Hurt: {fileID: 0}
+  Hurt: {fileID: 1589601875}
 --- !u!82 &1589601870
 AudioSource:
   m_ObjectHideFlags: 0
