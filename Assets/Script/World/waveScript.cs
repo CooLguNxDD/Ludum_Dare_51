@@ -25,8 +25,6 @@ public class waveScript : MonoBehaviour
         }
         if (transform.position.y < nextPos.y)
         {
-
-            Debug.Log(waveOffset);
             transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * waveMoveSpeed * (waveOffset), transform.position.z);
         }
     }
