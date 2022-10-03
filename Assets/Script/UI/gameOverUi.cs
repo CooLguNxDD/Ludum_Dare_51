@@ -41,7 +41,7 @@ public class gameOverUi : MonoBehaviour
 
         rect.position = new Vector3(rect.position.x, rect.position.y + 10, rect.position.z);
 
-        LeanTween.moveY(rect, currentPos.y, 2).setEaseInOutBack();
+        LeanTween.moveY(rect, -16, 2).setEaseInOutBack();
 
         walked.GetComponent<TextMeshProUGUI>().SetText("You Runned: " + Global.Runned + " M");
 

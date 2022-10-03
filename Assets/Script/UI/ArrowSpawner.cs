@@ -95,7 +95,7 @@ public class ArrowSpawner : MonoBehaviour
         newArrow.transform.position = new Vector3(target_x, target_y + 15, target_z);
 
         //animation
-        LeanTween.moveY(rect, target_y, 1).setEaseOutBounce();
+        LeanTween.moveY(rect, 18, 1).setEaseOutBounce();
 
 
         Global.HoldingObject.Enqueue(new Arrows(arrows.getDirection(), newArrow));
