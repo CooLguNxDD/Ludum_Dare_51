@@ -289,7 +289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4672828006640025006, guid: a046aebc34bda4a408ee0bf8c67c465e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4672828006640025006, guid: a046aebc34bda4a408ee0bf8c67c465e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -480,7 +480,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1356350837 stripped
 MonoBehaviour:
@@ -684,7 +684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4672828006640025006, guid: a046aebc34bda4a408ee0bf8c67c465e, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4672828006640025006, guid: a046aebc34bda4a408ee0bf8c67c465e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -808,6 +808,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1589601863}
+    - target: {fileID: 1544278487, guid: da6effea9faf7324fb175e96895867dd, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1791345436, guid: da6effea9faf7324fb175e96895867dd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -947,7 +951,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8690614639588185776, guid: 8fc8f0ec11e8d8746bba110bf9943db6, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8690614639588185776, guid: 8fc8f0ec11e8d8746bba110bf9943db6, type: 3}
       propertyPath: m_LocalPosition.x
