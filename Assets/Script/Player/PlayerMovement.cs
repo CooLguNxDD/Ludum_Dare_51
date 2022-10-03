@@ -130,6 +130,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Encounter();
             PlayerCellPosition = PreviousPlayerCellPosition;
+            return;
+        }
+        if (Global.GameOver)
+        {
+            return;
         }
         else
         {
