@@ -20,7 +20,7 @@ public class SpawnLineController : MonoBehaviour
             Spawned = true;
             
             Global.spawnNumber += 3;
-            Global.wavePerRound += 3;
+            Global.wavePerRound += 4;
         }
     }
     public bool isSpawned()
