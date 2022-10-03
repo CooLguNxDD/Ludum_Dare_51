@@ -46,15 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapPrefabList:
-  - {fileID: 0}
+  - {fileID: 2729262837097847593, guid: fbcbd1c3b61a4224e93112413f345854, type: 3}
+  - {fileID: 3739510041739837673, guid: 57dc601016ee6d34e8ecc2101a52c4e1, type: 3}
+  - {fileID: 2528026658239506846, guid: 0f3c6bb0659be0c4dafc646a07920b3c, type: 3}
+  - {fileID: 8242213866092420871, guid: 48747ede0d6044942b1b52d24ee9e499, type: 3}
   nextMap: {fileID: 0}
   currentMap: {fileID: 0}
   spawnLine: {fileID: 58908236646395508}
   endLine: {fileID: 385956793190341932}
-  mapOffset: 60
+  mapOffset: 65
   playerOffset: 0
-  player: {fileID: 0}
-  TileMap: {fileID: 0}
 --- !u!1 &58908236646395508
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +130,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -251,7 +252,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
