@@ -1,4 +1,5 @@
-
+# LINK: https://ldjam.com/events/ludum-dare/51/cat-wave-run
+# Itch.io: https://coolgunxdd.itch.io/cat-wave-run
 
 # Cat Wave RUN
 
